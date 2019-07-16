@@ -72,7 +72,7 @@ const getPostFromDOM = function(dom) {
     date,
     description,
     image,
-  };
+  }
 }
 
 // Return an object array of post data from the main list
@@ -86,7 +86,7 @@ const getPostsFromDOM = function(dom) {
     const url = elem.children[1].data.trim().replace('a href=', '').replace(/'/g, '')
     const location = elem.children[2].raw.trim().replace(/[()]/g, '')
     posts.push({name, url, location})
-  });
+  })
   return posts
 }
 
@@ -107,11 +107,11 @@ module.exports.getPosts = function(groupName, cb, type = this.TYPE.offer) {
     async.forEachOf(posts, (post, key, _cb) => {
       this.getPostByURL(post.url, (err, postObj) => {
         if (err) {
-          return _cb(err);
+          return _cb(err)
         }
         postObj.url = post.url
         results.push(postObj)
-        _cb();
+        _cb()
       })
     }, err => {
       return cb(err, results)

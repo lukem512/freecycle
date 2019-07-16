@@ -7,4 +7,5 @@ freecycle.getPosts('CambridgeUK', (err, posts) => {
     process.exit(1)
   }
   console.log(posts)
+  process.exit(0)
 })
