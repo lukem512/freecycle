@@ -109,6 +109,7 @@ module.exports.getPosts = function(groupName, cb, type = this.TYPE.offer) {
         if (err) {
           return _cb(err);
         }
+        postObj.url = post.url
         results.push(postObj)
         _cb();
       })
