@@ -4,9 +4,9 @@ A scraper for Freecycle.
 
 ## Installation
 
-`npm install`
-
 To install the dependencies, use NPM.
+
+`npm install`
 
 ## Usage
 
