@@ -30,6 +30,6 @@ freecycle.getPosts('CambridgeUK', (err, posts) => {
     return false
   })
 
-  console.log('highlights', highlights)
+  console.log(posts)
   process.exit(0)
 })

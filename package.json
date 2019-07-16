@@ -18,5 +18,14 @@
     "htmlparser": "^1.7.7",
     "request": "^2.88.0",
     "soupselect": "^0.2.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukem512/freecycle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lukem512/freecycle/issues"
+  },
+  "homepage": "https://github.com/lukem512/freecycle#readme"
 }
