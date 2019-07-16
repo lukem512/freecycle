@@ -1,0 +1,22 @@
+{
+  "name": "freecycle",
+  "version": "0.0.1",
+  "description": "A scraper for Freecycle",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "freecycle",
+    "scraper",
+    "api"
+  ],
+  "author": "Luke Mitchell",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.6.3",
+    "htmlparser": "^1.7.7",
+    "request": "^2.88.0",
+    "soupselect": "^0.2.0"
+  }
+}
