@@ -10,7 +10,7 @@ To install the dependencies, use NPM.
 
 ## Usage
 
-To begin scraping, run the `index.js` file using Node. You may wish to modify the blacklist and whitelist arrays inside this file.
+To begin scraping, run the `index.js` file using Node. You may wish to modify the `GROUPS`, `BLACKLIST` and `WHITELIST` arrays inside this file.
 
 `node index.js`
 

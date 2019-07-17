@@ -2,23 +2,21 @@ const async = require('async')
 const moment = require('moment')
 const Group = require('./freecycle/group')
 
-const blacklist = ['washing', 'iron'].map(item => item.toLowerCase())
-const whitelist = ['bed'].map(item => item.toLowerCase())
-
-const GROUPS = ['CambridgeUK', 'IslingtonEastUK']
-const groups = GROUPS.map(group => new Group(group))
+const BLACKLIST = ['washing', 'iron'].map(item => item.toLowerCase())
+const WHITELIST = ['bed'].map(item => item.toLowerCase())
+const GROUPS = ['CambridgeUK', 'IslingtonEastUK'].map(group => new Group(group))
 
 // Testing function
 const results = []
-async.forEachOf(groups, (group, key, cb) => {
+async.forEachOf(GROUPS, (group, key, cb) => {
   group.getPosts((err, posts) => {
     if (err) {
       return cb(err)
     }
 
-    // Remove any posts with blacklisted titles
+    // Remove any posts with BLACKLISTed titles
     const filtered = posts.filter(post => {
-      for (item of blacklist) {
+      for (item of BLACKLIST) {
         if (post.title.toLowerCase().indexOf(item) > -1) {
           return false
         }
@@ -26,9 +24,9 @@ async.forEachOf(groups, (group, key, cb) => {
       return true
     })
 
-    // Look for highlighted posts (titles with whitelisted terms)
+    // Look for highlighted posts (titles with WHITELISTed terms)
     const highlights = posts.filter(post => {
-      for (item of whitelist) {
+      for (item of WHITELIST) {
         if (post.title.toLowerCase().indexOf(item) > -1) {
           return true
         }
