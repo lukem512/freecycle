@@ -1,10 +1,13 @@
-const freecycle = require('./freecycle')
+const Group = require('./freecycle/group')
 
 const blacklist = ['washing', 'iron'].map(item => item.toLowerCase())
 const whitelist = ['bed'].map(item => item.toLowerCase())
 
+const GROUPS = ['CambridgeUK', 'IslingtonEastUK']
+const groups = GROUPS.map(group => new Group(group))
+
 // Testing function
-freecycle.getPosts('CambridgeUK', (err, posts) => {
+groups.forEach(group => group.getPosts((err, posts) => {
   if (err) {
     console.error('Could not retrieve posts', err)
     process.exit(1)
@@ -31,5 +34,4 @@ freecycle.getPosts('CambridgeUK', (err, posts) => {
   })
 
   console.log(posts)
-  process.exit(0)
-})
+}))
