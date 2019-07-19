@@ -26,7 +26,7 @@ freecycle.getPosts(GROUP_NAME, (err, posts) => {
 })
 ```
 
-The `posts` array is an array of objects with the following string fields:
+The `posts` array is an array of objects with the following `string` fields:
 
 ```js
 {
