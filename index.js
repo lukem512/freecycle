@@ -93,14 +93,14 @@ const getPostsFromDOM = function(dom) {
 // Retrieve a list of posts from the main page
 module.exports.getPosts = function(groupName, cb, type = this.TYPE.offer) {
   const postsURL = makePostsURL(groupName, {type})
-  request(postsURL, (err, res, body) => {
+  request({ url: postsURL, followRedirect: false }, (err, res, body) => {
     if (err) {
       console.error(`Error retrieving posts ${err}, ${postsURL}`)
       return cb(err)
     }
     if (res.statusCode !== 200) {
       console.warn(`Status code ${res.statusCode} for ${postsURL}`)
-      return cb(err)
+      return cb(new Error(`Invalid status code: ${res.statusCode}`))
     }
     const posts = getPostsFromDOM(parseHTML(body))
     const results = []
@@ -121,14 +121,14 @@ module.exports.getPosts = function(groupName, cb, type = this.TYPE.offer) {
 
 // Retrieve a post, given the URL
 module.exports.getPostByURL = function(postURL, cb) {
-  request(postURL, (err, res, body) => {
+  request({ url: postURL, followRedirect: false }, (err, res, body) => {
     if (err) {
       console.error(`Error retrieving post ${err}, ${postURL}`)
       return cb(err)
     }
     if (res.statusCode !== 200) {
       console.warn(`Status code ${res.statusCode} for ${postURL}`)
-      return cb(err)
+      return cb(new Error(`Invalid status code: ${res.statusCode}`))
     }
     const post = getPostFromDOM(parseHTML(body))
     return cb(err, post)
