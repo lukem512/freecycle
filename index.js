@@ -33,11 +33,9 @@ const makeGroupURL = function(groupName) {
 }
 
 // URL of the post results page
-const makePostsURL = function(groupName, opts = {}) {
-  const type = opts.type || this.TYPE.all
-  const page = opts.page || 1
-  const resultsPerPage = opts.resultsPerPage || 10
-  return `${makeGroupURL(groupName)}/posts/${type}?page=${page}&resultperpage=${resultsPerPage}`
+// N.B. setting resultsPerPage to less than 10 still yields 10 results
+const makePostsURL = function(groupName, { type = module.exports.TYPE.all, page = 1, resultsPerPage = 10 }) {
+  return `${makeGroupURL(groupName)}/posts/${type}?page=${page}&resultsperpage=${resultsPerPage}`
 }
 
 // URL of a particular post, given its ID
@@ -65,6 +63,7 @@ const getPostFromDOM = function(dom) {
     description = elems[4].children[3].children[0].raw.trim()
   }
 
+  // TODO: include type of post
   return {
     id,
     title,
@@ -91,8 +90,8 @@ const getPostsFromDOM = function(dom) {
 }
 
 // Retrieve a list of posts from the main page
-module.exports.getPosts = function(groupName, cb, type = this.TYPE.offer) {
-  const postsURL = makePostsURL(groupName, {type})
+module.exports.getPosts = function(groupName, cb, opts) {
+  const postsURL = makePostsURL(groupName, opts)
   request({ url: postsURL, followRedirect: false }, (err, res, body) => {
     if (err) {
       console.error(`Error retrieving posts ${err}, ${postsURL}`)
