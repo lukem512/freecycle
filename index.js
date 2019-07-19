@@ -47,7 +47,10 @@ const makePostURL = function(groupName, postId) {
 const getPostFromDOM = function(dom) {
   const headers = select(dom, "#group_post header h2")
   const id = headers[0].children[0].raw.trim().replace('Post ID: ', '')
-  const title = headers[1].children[0].raw.trim().replace('OFFER: ', '').replace('WANTED: ', '')
+  let title = headers[1].children[0].raw.trim()
+
+  const type = (title.indexOf('OFFER: ') > -1) ? module.exports.TYPE.offer : module.exports.TYPE.wanted
+  title = title.replace('OFFER: ', '').replace('WANTED: ', '')
 
   const details = select(dom, "#group_post #post_details div")
   const location = details[0].children[1].raw.trim()
@@ -66,6 +69,7 @@ const getPostFromDOM = function(dom) {
   // TODO: include type of post
   return {
     id,
+    type,
     title,
     location,
     date,
@@ -90,7 +94,7 @@ const getPostsFromDOM = function(dom) {
 }
 
 // Retrieve a list of posts from the main page
-module.exports.getPosts = function(groupName, cb, opts) {
+module.exports.getPosts = function(groupName, cb, opts = {}) {
   const postsURL = makePostsURL(groupName, opts)
   request({ url: postsURL, followRedirect: false }, (err, res, body) => {
     if (err) {

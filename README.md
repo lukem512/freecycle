@@ -52,6 +52,7 @@ The `post` object, returned by either `getPostBy` function, contains the followi
 ```js
 {
   id,
+  type,
   title,
   location,
   date,
