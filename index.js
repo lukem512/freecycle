@@ -66,7 +66,6 @@ const getPostFromDOM = function(dom) {
     description = elems[4].children[3].children[0].raw.trim()
   }
 
-  // TODO: include type of post
   return {
     id,
     type,
